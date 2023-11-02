@@ -66,6 +66,53 @@ from nltk.corpus import stopwords
 - Распределение по длине основного текста
 - Ключевые слова по каждой из тематик
 
+### Векторное представление слов и построение моделей 
+Были использованы следующие бибилиотеки:
+```python
+import pandas as pd
+import numpy as np
+import nltk
+from nltk.corpus import stopwords
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+from collections import defaultdict
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import Pipeline
+from sklearn.metrics import classification_report
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.svm import SVC
+
+import gensim.downloader
+from gensim.models import Word2Vec, KeyedVectors
+from natasha import Doc, Segmenter, MorphVocab, NewsEmbedding, NewsMorphTagger
+
+import mlxtend
+from mlxtend.evaluate import paired_ttest_kfold_cv
+
+from plotly.offline import iplot
+import cufflinks as cf
+```
+#### Предобработка текста
+Чтобы получить более точное и компактное представление текстов были совершены следующие этапы:
+
+- токенизация
+- лемматизация 
+- сегментация
+- удаление стоп-слов
+
+С помощью **Word2Vect** были получены векторные представления слов. 
+Для построения модели получили вектора предложений двумя способами:
+- Усреднить вектора слов, входящих в предложение
+- Взвесить вектора слов, входящих в предложение на основании их tf-idf весов
+
+#### Построение моделей
+Решили задачу классификации с помощью нескольких моделей:
+- Логистическая регрессия
+- Метод опорных векторов
+
 ## Лицензия
 
 Веб-сайт [Лента.ру](https://lenta.ru/) не предоставляет информацию о конкретной лицензии, по которой публикуется его контент. Таким образом, неясно, какая лицензия применяется к контенту на этом веб-сайте.
